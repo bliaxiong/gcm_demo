@@ -82,31 +82,13 @@ public class MyGcmListenerService extends GcmListenerService {
      */
     private void sendNotification(String title, String text) {
 
-        // Specifying the activity into the intent will open up to that activity view.
-        Intent intent = new Intent(this, SecondActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clears the notification on top
-
-
-        Intent intent1 = new Intent(Intent.ACTION_MAIN);
-
-//        intent1.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                this,
-                0 /* Request code */
-                , intent1,
-                PendingIntent.FLAG_ONE_SHOT /* Means this intent can only be used once. Only the first time the notification is clicked will it do anything. Subsequence taps on notification will do nothing.  */
-        );
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_ic_notification)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .addAction(R.drawable.common_google_signin_btn_text_light, "Click Me", pendingIntent);
-//                .setContentIntent(pendingIntent);
+                .setSound(defaultSoundUri);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
